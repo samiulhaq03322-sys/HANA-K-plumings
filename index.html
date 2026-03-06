@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hana K Plumbing & Gas | Professional South Manchester Services</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Open+Sans:wght@400;600&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-orange: #F58220;
+            --dark-charcoal: #1a1a1a;
+            --deep-black: #0f0f0f;
+            --light-grey: #f4f4f4;
+            --white: #FFFFFF;
+            --neon-glow: 0 0 15px rgba(245, 130, 32, 0.8), 0 0 30px rgba(245, 130, 32, 0.4);
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--dark-charcoal);
+            background-color: var(--white);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Animations --- */
+        @keyframes neonPulse {
+            0% { box-shadow: 0 0 5px rgba(245, 130, 32, 0.5); transform: scale(1); }
+            50% { box-shadow: var(--neon-glow); transform: scale(1.02); }
+            100% { box-shadow: 0 0 5px rgba(245, 130, 32, 0.5); transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- Buttons --- */
+        .btn-neon {
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: neonPulse 2s infinite ease-in-out;
+            cursor: pointer;
+        }
+
+        .btn-neon:hover {
+            background-color: #ff9d4d;
+            color: white;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(245, 130, 32, 0.4);
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .navbar-brand { color: var(--primary-orange) !important; font-size: 1.8rem; }
+        .nav-link { 
+            font-weight: 600; 
+            color: var(--dark-charcoal) !important; 
+            margin-left: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0; height: 2px;
+            bottom: 0; left: 0;
+            background-color: var(--primary-orange);
+            transition: 0.3s;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        /* --- Hero Carousel (Requested Location) --- */
+        .hero-carousel-container {
+            position: relative;
+            height: 90vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            z-index: 3;
+            pointer-events: auto;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .hero-carousel-item {
+            height: 90vh;
+            background-size: cover;
+            background-position: center;
+            transition: transform 10s ease-in-out;
+        }
+
+        .carousel-item.active .hero-carousel-item {
+            transform: scale(1.1);
+        }
+
+        /* --- Global Sections --- */
+        .page-content { display: none; }
+        .page-content.active { display: block; animation: fadeIn 0.8s ease forwards; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .section-padding { padding: 100px 0; }
+        .bg-grey { background-color: var(--light-grey); }
+        
+        .section-header {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .section-header .line {
+            width: 80px; height: 4px;
+            background: var(--primary-orange);
+            margin: 0 auto;
+        }
+
+        /* --- Card Styles --- */
+        .service-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.05);
+            height: 100%;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(245, 130, 32, 0.15);
+        }
+        .service-card i {
+            font-size: 3.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        /* --- Pricing Table --- */
+        .price-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .price-header {
+            background: var(--dark-charcoal);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 30px;
+            border-bottom: 1px solid #eee;
+        }
+        .price-row:nth-child(even) { background: #fafafa; }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--deep-black);
+            color: #ccc;
+            padding-top: 80px;
+        }
+        footer h5 { color: white; margin-bottom: 25px; }
+        footer .footer-link {
+            color: #999;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        footer .footer-link:hover { color: var(--primary-orange); padding-left: 10px; }
+
+        .contact-info-box {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
+        }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: #25d366;
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: 0.3s;
+            animation: float 3s infinite ease-in-out;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); color: white; }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-carousel-container, .hero-carousel-item { height: 70vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" onclick="showPage('home')">
+                <img src="images/logo.png" alt="AA Manchester Logo" style="height:50px;">
+                HANA K <span class="text-dark">PLUMBING</span>
+            </a>
+            
+    
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" onclick="showPage('home')">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="showPage('about')">The Story</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="showPage('services')">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="showPage('pricing')">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="showPage('testimonials')">Client Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="showPage('contact')">Book Online</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE: HOME -->
+    <div id="home" class="page-content active">
+        <!-- Hero Carousel Section (Requested Location) -->
+        <div class="hero-carousel-container">
+            <div class="carousel-overlay">
+                <div class="hero-content" data-aos="zoom-out">
+                    <span class="badge bg-orange mb-3 p-2" style="background: var(--primary-orange);">ESTABLISHED 2011</span>
+                    <h1 class="display-2 text-white">RELIABLE PLUMBING <br> & GAS EXPERTISE</h1>
+                    <p class="lead mb-4 fs-4 text-light">Professional, Female-Led Engineering serving South Manchester with pride and precision.</p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <button class="btn btn-neon" onclick="showPage('contact')">Request Free Quote</button>
+                        <button class="btn btn-outline-light rounded-pill px-5 py-3 fw-bold" onclick="showPage('services')">Our Expertise</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active"><div class="hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7bc3?auto=format&fit=crop&w=1920&q=80');"></div></div>
+                    <div class="carousel-item"><div class="hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1920&q=80');"></div></div>
+                    <div class="carousel-item"><div class="hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=1920&q=80');"></div></div>
+                    <div class="carousel-item"><div class="hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1920&q=80');"></div></div>
+                    <div class="carousel-item"><div class="hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1607400201585-062e24021200?auto=format&fit=crop&w=1920&q=80');"></div></div>
+                    <div class="carousel-item"><div class="hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1542013936693-884638332954?auto=format&fit=crop&w=1920&q=80');"></div></div>
+                    <div class="carousel-item"><div class="hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1620626011761-9963d7521576?auto=format&fit=crop&w=1920&q=80');"></div></div>
+                    <div class="carousel-item"><div class="hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=1920&q=80');"></div></div>
+                    <div class="carousel-item"><div class="hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1595113316349-9fa4046a769c?auto=format&fit=crop&w=1920&q=80');"></div></div>
+                    <div class="carousel-item"><div class="hero-carousel-item" style="background-image: url('https://images.unsplash.com/photo-1635048424329-a9bfb146d7aa?auto=format&fit=crop&w=1920&q=80');"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home Content: Core Pillars -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-6" data-aos="fade-right">
+                        <h2 class="display-4 fw-bold">Why Choose Us?</h2>
+                        <p class="lead text-muted">We don't just fix pipes; we build trust. Our mission is to provide South Manchester with a plumbing service that is transparent, clean, and reliable.</p>
+                        <div class="mt-4">
+                            <div class="d-flex mb-4">
+                                <div class="icon-circle bg-light p-3 rounded-circle me-3"><i class="fas fa-shield-alt text-orange"></i></div>
+                                <div><h5>Gas Safe Registered</h5><p>Full compliance with UK safety standards for your peace of mind.</p></div>
+                            </div>
+                            <div class="d-flex mb-4">
+                                <div class="icon-circle bg-light p-3 rounded-circle me-3"><i class="fas fa-clock text-orange"></i></div>
+                                <div><h5>On-Time, Every Time</h5><p>We value your time. We arrive when we say we will.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left">
+                        <img src="https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80" class="img-fluid rounded-4 shadow-lg" alt="Workshop">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Overview -->
+        <section class="section-padding bg-grey">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Specialist Services</h2>
+                    <div class="line"></div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4" data-aos="flip-left">
+                        <div class="service-card">
+                            <i class="fas fa-fire"></i>
+                            <h3>Boiler Solutions</h3>
+                            <p>Annual servicing, emergency repairs, and full installations of high-efficiency combi boilers.</p>
+                            <a class="text-orange fw-bold" onclick="showPage('services')">Learn More →</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
+                        <div class="service-card">
+                            <i class="fas fa-tint"></i>
+                            <h3>General Plumbing</h3>
+                            <p>From dripping taps to full bathroom renovations. We handle all wet plumbing tasks with ease.</p>
+                            <a class="text-orange fw-bold" onclick="showPage('services')">Learn More →</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
+                        <div class="service-card">
+                            <i class="fas fa-gas-pump"></i>
+                            <h3>Gas Safety</h3>
+                            <p>Landlord certifications (CP12), cooker installations, and gas leak detection services.</p>
+                            <a class="text-orange fw-bold" onclick="showPage('services')">Learn More →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE: ABOUT -->
+    <div id="about" class="page-content">
+        <header class="bg-dark text-white py-5 text-center">
+            <h1 class="display-3">The Story of Hana K</h1>
+        </header>
+        <section class="section-padding">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6">
+                        <img src="https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?auto=format&fit=crop&w=800&q=80" class="img-fluid rounded-4 shadow" alt="Professional Work">
+                    </div>
+                    <div class="col-lg-6">
+                        <h2 class="mb-4">Over a Decade of Excellence</h2>
+                        <p>Hana K Plumbing & Gas was founded in 2011 with a simple goal: to provide a friendly, non-intimidating, and highly professional service to the South Manchester community.</p>
+                        <p>As a female-led business, we bring a meticulous eye for detail and a commitment to leaving every home cleaner than we found it. We understand that having tradespeople in your home can be stressful, which is why we prioritize clear communication and respect for your property.</p>
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <h3 class="text-orange">12+</h3>
+                                <p class="text-muted">Years Experience</p>
+                            </div>
+                            <div class="col-6">
+                                <h3 class="text-orange">2k+</h3>
+                                <p class="text-muted">Happy Clients</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-neon mt-4" onclick="showPage('contact')">Let's Work Together</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE: SERVICES -->
+    <div id="services" class="page-content">
+        <header class="bg-dark text-white py-5 text-center"><h1 class="display-3">Full Service List</h1></header>
+        <section class="section-padding">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-4">
+                        <div class="p-4 bg-grey rounded-4">
+                            <h4 class="text-orange">Heating</h4>
+                            <ul class="list-unstyled mt-3">
+                                <li><i class="fas fa-check text-success me-2"></i> Boiler Servicing</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Radiator Replacement</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Power Flushing</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Thermostat Upgrades</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="p-4 bg-grey rounded-4">
+                            <h4 class="text-orange">Plumbing</h4>
+                            <ul class="list-unstyled mt-3">
+                                <li><i class="fas fa-check text-success me-2"></i> Tap Repairs & Fits</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Toilet Maintenance</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Shower Installations</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Leak Detection</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="p-4 bg-grey rounded-4">
+                            <h4 class="text-orange">Gas Safety</h4>
+                            <ul class="list-unstyled mt-3">
+                                <li><i class="fas fa-check text-success me-2"></i> Landlord Certificates</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Cooker Installation</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Gas Pipework</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Safety Inspections</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE: PRICING -->
+    <div id="pricing" class="page-content">
+        <header class="bg-dark text-white py-5 text-center"><h1 class="display-3">Transparent Rates</h1></header>
+        <section class="section-padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="price-table">
+                            <div class="price-header"><h4>Standard Service Fees</h4></div>
+                            <div class="price-row"><span>Boiler Service</span><strong>From £85</strong></div>
+                            <div class="price-row"><span>Gas Safety CP12</span><strong>From £75</strong></div>
+                            <div class="price-row"><span>Combined Service & CP12</span><strong>From £120</strong></div>
+                            <div class="price-row"><span>Tap/Toilet Repair</span><strong>£65 (First Hour)</strong></div>
+                            <div class="price-row"><span>Emergency Call-out</span><strong>Quote Required</strong></div>
+                        </div>
+                        <p class="text-center mt-4 text-muted">* Prices are estimates. Please contact us for a specific quote based on your requirements.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE: TESTIMONIALS -->
+    <div id="testimonials" class="page-content">
+        <header class="bg-dark text-white py-5 text-center"><h1 class="display-3">Customer Love</h1></header>
+        <section class="section-padding bg-light">
+            <div class="container">
+                <div class="row g-4" id="full-testimonials">
+                    <!-- Dynamic Loading -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE: CONTACT -->
+    <div id="contact" class="page-content">
+        <header class="bg-dark text-white py-5 text-center"><h1 class="display-3">Get A Quote</h1></header>
+        <section class="section-padding">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-6">
+                        <h2>Send us a message</h2>
+                        <p>Fill out the form below and Hana will get back to you within 24 hours.</p>
+                        <form id="contactFormMain" class="mt-4">
+                            <div class="row">
+                                <div class="col-md-6 mb-3"><input type="text" class="form-control p-3" placeholder="First Name" required></div>
+                                <div class="col-md-6 mb-3"><input type="text" class="form-control p-3" placeholder="Last Name" required></div>
+                            </div>
+                            <div class="mb-3"><input type="email" class="form-control p-3" placeholder="Email Address" required></div>
+                            <div class="mb-3"><input type="tel" class="form-control p-3" placeholder="Phone Number" required></div>
+                            <div class="mb-3"><textarea class="form-control p-3" rows="5" placeholder="Tell us about your project..."></textarea></div>
+                            <button type="submit" class="btn btn-neon w-100">Send Enquiry</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="bg-dark p-5 rounded-4 text-white h-100">
+                            <h3>Direct Contact</h3>
+                            <hr class="border-orange">
+                            <p class="mb-4"><i class="fas fa-map-marker-alt text-orange me-3"></i> Serving Didsbury, Chorlton, Withington, and surrounding areas.</p>
+                            <p class="mb-4"><i class="fas fa-phone-alt text-orange me-3"></i> 07538 249229</p>
+                            <p class="mb-4"><i class="fas fa-envelope text-orange me-3"></i> info@hanakplumbing.co.uk</p>
+                            <div class="mt-5">
+                                <h5>Operating Hours</h5>
+                                <div class="d-flex justify-content-between mb-2"><span>Mon - Fri</span><span>08:30 - 18:00</span></div>
+                                <div class="d-flex justify-content-between"><span>Sat - Sun</span><span>Emergency Only</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-5 pb-5">
+                <div class="col-lg-4">
+                    <h3 class="text-orange mb-3">HANA K PLUMBING</h3>
+                    <p>Building a safer, warmer South Manchester since 2011. Fully qualified, insured, and ready to help.</p>
+                    <div class="fs-3 d-flex gap-3">
+                        <i class="fab fa-cc-visa text-muted"></i>
+                        <i class="fab fa-cc-mastercard text-muted"></i>
+                        <i class="fas fa-university text-muted"></i>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Navigation</h5>
+                    <a class="footer-link" onclick="showPage('home')">Home</a>
+                    <a class="footer-link" onclick="showPage('about')">About Us</a>
+                    <a class="footer-link" onclick="showPage('services')">Our Services</a>
+                    <a class="footer-link" onclick="showPage('pricing')">Price List</a>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Legals</h5>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Gas Safe Info</a>
+                </div>
+                <div class="col-lg-4">
+                    <div class="contact-info-box">
+                        <h5>Fast Contact</h5>
+                        <p>Need a plumber fast? Click below to start a WhatsApp chat or call us directly.</p>
+                        <a href="tel:07538249229" class="btn btn-outline-light w-100 mb-3">Call: 07538 249229</a>
+                        <a href="https://wa.me/447538249229" class="btn btn-success w-100">WhatsApp Us</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-top border-secondary pt-4 text-center">
+                <p class="small">&copy; 2024 Hana K Plumbing & Gas. Designed for South Manchester.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/447538249229" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        function showPage(pageId) {
+            // Update active states
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Sync Nav Links
+            const activeLink = Array.from(document.querySelectorAll('.nav-link')).find(l => 
+                l.getAttribute('onclick').includes(`'${pageId}'`)
+            );
+            if (activeLink) activeLink.classList.add('active');
+
+            // Close mobile menu
+            const navCollapse = document.getElementById('navbarNav');
+            if (navCollapse.classList.contains('show')) {
+                const bsCollapse = new bootstrap.Collapse(navCollapse);
+                bsCollapse.hide();
+            }
+            AOS.refresh();
+        }
+
+        // Expanded Testimonials
+        const testimonialList = [
+            { name: "Emily Rogers", loc: "Didsbury", text: "Hana is the most reliable plumber I've ever used. She explains everything clearly and is very tidy.", stars: 5 },
+            { name: "John Spencer", loc: "Chorlton", text: "Had a boiler breakdown in the middle of winter. Hana was there within 3 hours. Phenomenal service.", stars: 5 },
+            { name: "Sarah Khan", loc: "Withington", text: "Lovely to have a female plumber who is so professional. She did a full bathroom refit and it's perfect.", stars: 5 },
+            { name: "David Miller", loc: "Stretford", text: "Honest pricing and great workmanship. Wouldn't call anyone else for gas safety checks.", stars: 5 },
+            { name: "Karen L.", loc: "Fallowfield", text: "Highly recommend for any boiler issues. Fast, friendly, and very knowledgeable.", stars: 5 },
+            { name: "James H.", loc: "Burnage", text: "Best value for money in South Manchester. No hidden fees ever.", stars: 5 }
+        ];
+
+        const tContainer = document.getElementById('full-testimonials');
+        if(tContainer) {
+            testimonialList.forEach(t => {
+                tContainer.innerHTML += `
+                    <div class="col-md-4" data-aos="fade-up">
+                        <div class="card p-4 h-100 border-0 shadow-sm rounded-4">
+                            <div class="text-warning mb-3">${'<i class="fas fa-star"></i>'.repeat(t.stars)}</div>
+                            <p class="italic">"${t.text}"</p>
+                            <div class="mt-auto pt-3 border-top">
+                                <h6 class="mb-0 fw-bold">${t.name}</h6>
+                                <small class="text-muted">${t.loc}</small>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>
